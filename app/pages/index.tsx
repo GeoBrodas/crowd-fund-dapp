@@ -1,6 +1,12 @@
 import Head from 'next/head';
-import Image from 'next/image';
 
 export default function Home() {
-  return <div>Hi</div>;
+  return (
+    <div>
+      <Head>
+        <title>GoFundMe</title>
+      </Head>
+      hi
+    </div>
+  );
 }

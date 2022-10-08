@@ -1,13 +1,16 @@
 import { NextUIProvider } from '@nextui-org/react';
+import { Wallet } from '../components/wallet/Wallet';
 import Landing from '../layouts/Landing';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <NextUIProvider>
-      <Landing>
-        <Component {...pageProps} />
-      </Landing>
-    </NextUIProvider>
+    <Wallet>
+      <NextUIProvider>
+        <Landing>
+          <Component {...pageProps} />
+        </Landing>
+      </NextUIProvider>
+    </Wallet>
   );
 }
 
