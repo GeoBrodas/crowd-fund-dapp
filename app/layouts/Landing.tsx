@@ -31,7 +31,7 @@ function Landing({ children }) {
           <Navbar.Item>
             <WalletMultiButton
               style={{
-                backgroundColor: '#DFF6FF',
+                backgroundColor: 'white',
                 color: 'black',
                 border: '2px solid black',
                 borderRadius: '10px',
