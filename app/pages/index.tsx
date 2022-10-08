@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import EntryIndex from '../components/home/EntryIndex';
 
 export default function Home() {
   return (
@@ -6,7 +7,8 @@ export default function Home() {
       <Head>
         <title>GoFundMe</title>
       </Head>
-      hi
+
+      <EntryIndex />
     </div>
   );
 }

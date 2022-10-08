@@ -3,7 +3,11 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 
 function Landing({ children }) {
   return (
-    <div>
+    <div
+      style={{
+        backgroundColor: '#DFF6FF',
+      }}
+    >
       <Navbar
         css={{
           backgroundColor: 'var(--accents-1)',
@@ -27,7 +31,7 @@ function Landing({ children }) {
           <Navbar.Item>
             <WalletMultiButton
               style={{
-                backgroundColor: 'white',
+                backgroundColor: '#DFF6FF',
                 color: 'black',
                 border: '2px solid black',
                 borderRadius: '10px',
