@@ -4,6 +4,8 @@ declare_id!("Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS");
 
 #[program]
 pub mod crowd_fund {
+    use anchor_lang::solana_program::entrypoint::ProgramResult;
+
     use super::*;
 
     pub fn create(ctx: Context<Create>, name: String, description: String) -> Result<()> {
@@ -17,22 +19,42 @@ pub mod crowd_fund {
         Ok(())
     }
 
-    pub fn withdraw(ctx: Context<Withdraw>, amount: u64) -> Result<()> {
+    pub fn withdraw(ctx: Context<Withdraw>, amount: u64) -> ProgramResult {
         let campaign = &mut ctx.accounts.campaign;
         let user = &mut ctx.accounts.user;
 
         if campaign.admin != *user.key {
-            return Err(ErrorCode::ConstraintOwner.into());
+            return Err(ProgramError::IncorrectProgramId);
         }
 
         let rent_balance = Rent::get()?.minimum_balance(campaign.to_account_info().data_len());
 
         if **campaign.to_account_info().lamports.borrow() - rent_balance < amount {
-            return Err(ErrorCode::ConstraintRentExempt.into());
+            return Err(ProgramError::InsufficientFunds);
         }
 
         **campaign.to_account_info().try_borrow_mut_lamports()? -= amount;
         **user.to_account_info().try_borrow_mut_lamports()? += amount;
+
+        Ok(())
+    }
+
+    pub fn donate(ctx: Context<Donate>, amount: u64) -> ProgramResult {
+        let ix = anchor_lang::solana_program::system_instruction::transfer(
+            &ctx.accounts.user.key(),
+            &ctx.accounts.campaign.key(),
+            amount,
+        );
+
+        anchor_lang::solana_program::program::invoke(
+            &ix,
+            &[
+                ctx.accounts.user.to_account_info(),
+                ctx.accounts.campaign.to_account_info(),
+            ],
+        );
+
+        (&mut ctx.accounts.campaign).amount_donated += amount;
 
         Ok(())
     }
@@ -55,6 +77,16 @@ pub struct Withdraw<'info> {
 
     #[account(mut)]
     pub user: Signer<'info>,
+}
+
+#[derive(Accounts)]
+pub struct Donate<'info> {
+    #[account(mut)]
+    pub campaign: Account<'info, Campaign>,
+
+    #[account(mut)]
+    pub user: Signer<'info>,
+    pub system_program: Program<'info, System>,
 }
 
 #[account]
