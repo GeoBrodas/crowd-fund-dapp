@@ -2,13 +2,13 @@
 seeds = false
 skip-lint = false
 [programs.localnet]
-crowd_fund = "Fg6PaFpoGXkYsidMpWTK6W2BeZ7FEfcYkg476zPFsLnS"
+crowd_fund = "HwP3YY71PLysJzKzbpYTk1BzNxfg9PNQ8ZZQJzPWAYFs"
 
 [registry]
 url = "https://api.apr.dev"
 
 [provider]
-cluster = "localnet"
+cluster = "devnet"
 wallet = "/home/geobrodas/.config/solana/id.json"
 
 [scripts]
