@@ -1,9 +1,11 @@
-import { Button, Container, Text } from '@nextui-org/react';
+import { Button, Container, Loading, Text } from '@nextui-org/react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import { useWeb3 } from '../../context/web3';
 import { Wallet } from '../wallet/Wallet';
 
 function EntryIndex() {
   const wallet = useWallet();
+  const { createCampaign, isLoading } = useWeb3();
 
   return (
     <Container
@@ -54,6 +56,9 @@ function EntryIndex() {
             width: 'fit-content',
           },
         }}
+        onClick={() =>
+          createCampaign('Save the Titanic', "Let's save the Titanic")
+        }
       >
         Explore other campaigns
       </Button>

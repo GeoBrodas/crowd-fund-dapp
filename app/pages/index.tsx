@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import CampaignListandCreate from '../components/home/CampaignListandCreate';
 import EntryIndex from '../components/home/EntryIndex';
 
 export default function Home() {
@@ -9,6 +10,8 @@ export default function Home() {
       </Head>
 
       <EntryIndex />
+
+      <CampaignListandCreate />
     </div>
   );
 }
