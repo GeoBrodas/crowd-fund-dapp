@@ -14,7 +14,7 @@ const { SystemProgram } = web3;
 const Context = createContext({
   isLoading: false,
   setIsLoading: (value: boolean) => {},
-  programId: '',
+  programId: PublicKey.default,
   createCampaign: (name: string, description: string) => {},
   campaigns: [],
   getAllCampaign: () => {},
@@ -99,6 +99,7 @@ const Provider = ({ children }) => {
 
   useEffect(() => {
     getAllCampaign();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const exposed = {
