@@ -1,4 +1,4 @@
-import { Button, Container, Loading, Text } from '@nextui-org/react';
+import { Button, Container, Text } from '@nextui-org/react';
 import { IoMdAdd } from 'react-icons/io';
 import { useWeb3 } from '../../context/web3';
 import ListCampaigns from './ListCampaigns';
@@ -13,6 +13,7 @@ function CampaignListandCreate() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
+        height: '70vh',
       }}
     >
       <Container
@@ -36,14 +37,12 @@ function CampaignListandCreate() {
         >
           <Button
             css={{
-              width: '10px',
               marginRight: '10px',
             }}
-            ghost
             disabled={isLoading}
             onClick={() => getAllCampaign()}
           >
-            {isLoading ? <Loading /> : 'Refresh'}
+            Refresh
           </Button>
 
           <Button
@@ -52,6 +51,7 @@ function CampaignListandCreate() {
             css={{
               width: '220px',
             }}
+            flat
           >
             Create New Campaign
           </Button>
