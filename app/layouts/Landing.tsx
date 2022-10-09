@@ -27,7 +27,14 @@ function Landing({ children }) {
             </Text>
           </Navbar.Brand>
 
-          <Navbar.Content>
+          <Navbar.Content
+            css={{
+              display: 'none',
+              '@md': {
+                display: 'inline-flex',
+              },
+            }}
+          >
             <Navbar.Item>Home</Navbar.Item>
             <Navbar.Item>About us</Navbar.Item>
           </Navbar.Content>

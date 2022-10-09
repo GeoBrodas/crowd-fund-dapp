@@ -31,17 +31,30 @@ function ListCampaigns() {
           <Card
             css={{
               margin: '30px 0',
-              width: '70%',
+              width: '100%',
               padding: '0 20px',
-              alignItems: 'center',
+              alignItems: 'start',
+
+              '@sm': {
+                width: '100%',
+                alignItems: 'center',
+              },
+              '@md': {
+                width: '70%',
+                alignItems: 'center',
+              },
             }}
             key={index}
           >
             <Card.Body
               css={{
                 display: 'flex',
-                flexDirection: 'row',
+                flexDirection: 'column',
                 justifyContent: 'space-between',
+
+                '@sm': {
+                  flexDirection: 'row',
+                },
               }}
             >
               <div>
@@ -56,19 +69,32 @@ function ListCampaigns() {
               <Container
                 css={{
                   margin: '0',
+                  padding: '0',
                   display: 'flex',
                   width: 'fit-content',
-                  flexDirection: 'column',
+                  flexDirection: 'row',
                   alignItems: 'center',
+                  marginTop: '10px',
+                  gap: '10px',
+
+                  '@sm': {
+                    flexDirection: 'column',
+                    gap: '0',
+                  },
                 }}
               >
                 <Container
                   css={{
+                    width: 'auto',
                     display: 'flex',
                     margin: '0',
-                    gap: '10px',
+                    padding: '0',
                     alignItems: 'center',
-                    justifyContent: 'center',
+                    flexDirection: 'row',
+                    gap: '5px',
+                    '@sm': {
+                      gap: '10px',
+                    },
                   }}
                 >
                   <Text
@@ -76,7 +102,11 @@ function ListCampaigns() {
                     size="large"
                     color="primary"
                     css={{
-                      textAlign: 'right',
+                      textAlign: 'left',
+
+                      '@sm': {
+                        textAlign: 'right',
+                      },
                     }}
                   >
                     {campaign.amountDonated.toNumber() / LAMPORTS_PER_SOL}
@@ -87,7 +117,7 @@ function ListCampaigns() {
                 </Container>
 
                 {publicKey && (
-                  <Button bordered>
+                  <Button auto bordered>
                     Donate <IoMdHeart />
                   </Button>
                 )}

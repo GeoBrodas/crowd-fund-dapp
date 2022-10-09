@@ -20,27 +20,49 @@ function CampaignListandCreate() {
     >
       <Container
         css={{
-          width: '70%',
+          width: '100%',
           display: 'flex',
-
+          flexDirection: 'column',
           justifyContent: 'space-between',
           alignItems: 'center',
+
+          '@sm': {
+            width: '100%',
+            flexDirection: 'row',
+          },
+          '@md': {
+            width: '70%',
+            flexDirection: 'row',
+          },
         }}
       >
-        <Text h3>Create or fund campaigns</Text>
+        <Text
+          css={{
+            fontSize: '1.2rem',
+            fontWeight: 'bold',
+
+            '@md': {
+              fontSize: '1.5rem',
+              fontWeight: 'bold',
+            },
+          }}
+        >
+          Create or fund campaigns
+        </Text>
 
         <Container
           css={{
             margin: '0',
             width: 'auto',
             display: 'flex',
-            justifyContent: 'end',
+            justifyContent: 'center',
           }}
         >
           <Button
             css={{
               marginRight: '10px',
             }}
+            auto
             disabled={isLoading}
             onClick={() => getAllCampaign()}
           >
@@ -48,14 +70,7 @@ function CampaignListandCreate() {
           </Button>
 
           {wallet.publicKey && (
-            <Button
-              bordered
-              iconRight={<IoMdAdd size={'20px'} />}
-              css={{
-                width: '220px',
-              }}
-              flat
-            >
+            <Button bordered iconRight={<IoMdAdd size={'20px'} />} auto flat>
               Create New Campaign
             </Button>
           )}
