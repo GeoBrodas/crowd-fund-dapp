@@ -8,7 +8,7 @@ import {
   BN,
 } from '@project-serum/anchor';
 import { useWallet } from '@solana/wallet-adapter-react';
-import idl from '../utils/idl.json';
+import IDL from '../utils/idl.json';
 const { SystemProgram } = web3;
 
 const Context = createContext({
@@ -20,7 +20,7 @@ const Context = createContext({
   getAllCampaign: () => {},
 });
 
-const programId = new PublicKey(idl.metadata.address);
+const programId = new PublicKey(IDL.metadata.address);
 const network = clusterApiUrl('devnet');
 
 const Provider = ({ children }) => {
@@ -45,7 +45,7 @@ const Provider = ({ children }) => {
 
     try {
       const provider = getProvider();
-      const program = new Program(idl, programId, provider);
+      const program = new Program(IDL as any, programId, provider);
 
       const [campaign] = await PublicKey.findProgramAddress(
         [
@@ -79,7 +79,7 @@ const Provider = ({ children }) => {
 
     try {
       const provider = getProvider();
-      const program = new Program(idl, programId, provider);
+      const program = new Program(IDL as any, programId, provider);
 
       Promise.all(
         (await connection.getProgramAccounts(programId)).map(
