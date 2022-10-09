@@ -1,13 +1,13 @@
 import { Button, Card, Container, Loading, Text } from '@nextui-org/react';
 import { BN } from '@project-serum/anchor';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { LAMPORTS_PER_SOL } from '@solana/web3.js';
 import { IoMdHeart } from 'react-icons/io';
 import { useWeb3 } from '../../context/web3';
 
 function ListCampaigns() {
   const { campaigns, isLoading } = useWeb3();
-
-  console.log(campaigns);
+  const { publicKey } = useWallet();
 
   return (
     <Container
@@ -71,9 +71,6 @@ function ListCampaigns() {
                     justifyContent: 'center',
                   }}
                 >
-                  <Text h5 size="large">
-                    $SOL raised
-                  </Text>
                   <Text
                     h5
                     size="large"
@@ -84,11 +81,16 @@ function ListCampaigns() {
                   >
                     {campaign.amountDonated.toNumber() / LAMPORTS_PER_SOL}
                   </Text>
+                  <Text h5 size="large">
+                    $SOL raised
+                  </Text>
                 </Container>
 
-                <Button>
-                  Donate <IoMdHeart />
-                </Button>
+                {publicKey && (
+                  <Button bordered>
+                    Donate <IoMdHeart />
+                  </Button>
+                )}
               </Container>
             </Card.Body>
           </Card>

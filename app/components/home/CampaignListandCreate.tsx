@@ -1,10 +1,12 @@
 import { Button, Container, Text } from '@nextui-org/react';
+import { useWallet } from '@solana/wallet-adapter-react';
 import { IoMdAdd } from 'react-icons/io';
 import { useWeb3 } from '../../context/web3';
 import ListCampaigns from './ListCampaigns';
 
 function CampaignListandCreate() {
   const { getAllCampaign, isLoading } = useWeb3();
+  const wallet = useWallet();
 
   return (
     <Container
@@ -45,16 +47,18 @@ function CampaignListandCreate() {
             Refresh
           </Button>
 
-          <Button
-            bordered
-            iconRight={<IoMdAdd size={'20px'} />}
-            css={{
-              width: '220px',
-            }}
-            flat
-          >
-            Create New Campaign
-          </Button>
+          {wallet.publicKey && (
+            <Button
+              bordered
+              iconRight={<IoMdAdd size={'20px'} />}
+              css={{
+                width: '220px',
+              }}
+              flat
+            >
+              Create New Campaign
+            </Button>
+          )}
         </Container>
       </Container>
 
