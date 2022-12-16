@@ -2,10 +2,11 @@ import { Button, Container, Text } from '@nextui-org/react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { IoMdAdd } from 'react-icons/io';
 import { useWeb3 } from '../../context/web3';
+import CreateCampaignModal from './CreateCampaignModal';
 import ListCampaigns from './ListCampaigns';
 
 function CampaignListandCreate() {
-  const { getAllCampaign, isLoading } = useWeb3();
+  const { getAllCampaign, isLoading, isVisible, setIsVisible } = useWeb3();
   const wallet = useWallet();
 
   return (
@@ -70,11 +71,22 @@ function CampaignListandCreate() {
           </Button>
 
           {wallet.publicKey && (
-            <Button bordered iconRight={<IoMdAdd size={'20px'} />} auto flat>
+            <Button
+              onClick={() => setIsVisible(true)}
+              bordered
+              iconRight={<IoMdAdd size={'20px'} />}
+              auto
+              flat
+            >
               Create New Campaign
             </Button>
           )}
         </Container>
+
+        <CreateCampaignModal
+          visible={isVisible}
+          closeHandler={() => setIsVisible(false)}
+        />
       </Container>
 
       {/* List campaigns */}

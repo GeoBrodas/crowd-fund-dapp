@@ -1,12 +1,13 @@
 import { Button, Card, Container, Loading, Text } from '@nextui-org/react';
 import { BN } from '@project-serum/anchor';
 import { useWallet } from '@solana/wallet-adapter-react';
-import { LAMPORTS_PER_SOL } from '@solana/web3.js';
-import { IoMdHeart } from 'react-icons/io';
+import { LAMPORTS_PER_SOL, PublicKey } from '@solana/web3.js';
+import { IoMdCash, IoMdHeart } from 'react-icons/io';
 import { useWeb3 } from '../../context/web3';
 
 function ListCampaigns() {
-  const { campaigns, isLoading } = useWeb3();
+  const { campaigns, isLoading, donateToCampaign, withDrawFromCampaign } =
+    useWeb3();
   const { publicKey } = useWallet();
 
   return (
@@ -117,9 +118,40 @@ function ListCampaigns() {
                 </Container>
 
                 {publicKey && (
-                  <Button auto bordered>
-                    Donate <IoMdHeart />
-                  </Button>
+                  <Container
+                    css={{
+                      width: 'auto',
+                      display: 'flex',
+                      margin: '0',
+                      padding: '0',
+                      alignItems: 'center',
+                      flexDirection: 'row',
+                      gap: '5px',
+                    }}
+                  >
+                    <Button
+                      onClick={() => donateToCampaign(campaign.pubKey)}
+                      auto
+                      bordered
+                    >
+                      Donate <IoMdHeart />
+                    </Button>
+                    {new PublicKey(campaign.admin).toString() ===
+                      publicKey.toString() && (
+                      <Button
+                        onClick={() =>
+                          withDrawFromCampaign(
+                            campaign.pubKey,
+                            campaign.amountDonated.toNumber() / LAMPORTS_PER_SOL
+                          )
+                        }
+                        auto
+                        bordered
+                      >
+                        Withdraw <IoMdCash />
+                      </Button>
+                    )}
+                  </Container>
                 )}
               </Container>
             </Card.Body>
