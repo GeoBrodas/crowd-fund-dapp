@@ -31,7 +31,7 @@ function ListCampaigns() {
         campaigns.map((campaign, index) => (
           <Card
             css={{
-              margin: '30px 0',
+              margin: '10px 0',
               width: '100%',
               padding: '0 20px',
               alignItems: 'start',

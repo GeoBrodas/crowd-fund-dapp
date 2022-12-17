@@ -37,7 +37,7 @@ const Provider = ({ children }) => {
 
   const getProvider = () => {
     const provider = new AnchorProvider(connection, wallet, {
-      preflightCommitment: 'processed',
+      preflightCommitment: 'confirmed',
     });
 
     return provider;

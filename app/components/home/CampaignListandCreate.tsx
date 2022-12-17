@@ -16,7 +16,7 @@ function CampaignListandCreate() {
         flexDirection: 'column',
         justifyContent: 'center',
         alignItems: 'center',
-        height: '70vh',
+        height: 'auto',
       }}
     >
       <Container
